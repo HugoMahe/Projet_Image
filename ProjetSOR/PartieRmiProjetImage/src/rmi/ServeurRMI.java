@@ -8,9 +8,7 @@ import java.rmi.RemoteException;
  * @author Hugo Mahé, Léo Mazé
  *
  */
-public interface ServeurRMI extends Remote {
+public interface ServeurRMI  extends Remote {
 
 	public String meth() throws RemoteException ;
-	public byte[] recupererImage(int idImage) throws RemoteException;
-	public Integer trouverImage(String titre) throws RemoteException;
 }

@@ -4,13 +4,10 @@
     </head>
     <body>
         <h1>Formulaire d'envoi de fichier</h1>
-        <form action="http://www.example.com/register"
-       enctype="multipart/form-data"
-    method="post">
-    <p>
-    Nom du fichier <input type="text" name="submit-name"/>
-    Chercher le fichier <input type="file" name="thefile"/>
-    <input type="submit" value="Envoyer"/> 
-    </form>
+        <form action="http://localhost:8080/PartieServletProjetImage/AjoutImage" enctype="multipart/form-data" method="post">
+             Nom du fichier <input type="text" name="titre"/>
+             Chercher le fichier <input type="file" name="fichier"/>
+            <input type="submit" value="Envoyer le fichier"/> 
+        </form>
     </body>
 </html>
