@@ -19,8 +19,10 @@ public class ClientRMI {
 		this.titre=titre;
 	}
 	
+	public ClientRMI( ) {
+	}
+	
 	public static void main(String [] args) {
-		System.out.println("Lancement client RMI");
 		int port = 10000;
 		
 		try {
@@ -38,7 +40,50 @@ public class ClientRMI {
 		catch (Exception e) {
 			System.out.println("Erreur Client RMI "+e.getMessage());
 		}
-		
+	}
+	
+
+	public byte[] recupererImage(int idImage) {
+
+		int port = 10000;
+		byte[] image = null;
+
+		try {
+			Registry registry = LocateRegistry.
+					getRegistry(port);
+			
+			ServeurRMI srmi = (ServeurRMI) 
+					registry.lookup("serveurRMI");
+
+			String res = srmi.meth();
+
+			System.out.println("res = "+res);
+			image = srmi.recupererImage(idImage);
+		}
+		catch (Exception e) {
+			System.out.println("Erreur Client RMI "+e.getMessage());
+		}
+
+		return image;
 	}
 
+	public Integer trouverImage(String titre) {
+
+		int port = 10000;
+		Integer idImage = null;
+
+		try {
+			Registry registry = LocateRegistry.
+					getRegistry(port);
+
+			ServeurRMI srmi = (ServeurRMI) 
+					registry.lookup("serveurRMI");
+
+			idImage = srmi.trouverImage(titre);
+		}
+		catch (Exception e) {
+			System.out.println("Erreur Client RMI "+e.getMessage());
+		}
+		return idImage;
+	}
 }

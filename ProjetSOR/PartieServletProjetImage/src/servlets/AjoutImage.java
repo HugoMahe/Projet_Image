@@ -22,8 +22,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import bean.Image;
 import rmi.ClientRMI;
-import sun.nio.ch.IOUtil;
-
 /**
  * Servlet implementation class AjoutImage
  */

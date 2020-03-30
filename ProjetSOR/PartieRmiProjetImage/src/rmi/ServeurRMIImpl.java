@@ -32,6 +32,28 @@ public class ServeurRMIImpl implements ServeurRMI {
 		return false;
 	}
 	
+	@Override
+	public byte[] recupererImage(int idImage) throws RemoteException {
+		byte[] image = null;
+		Base base = new Base();
+		if (base.ouvrir()) {
+			image = base.recuperationImage(idImage);
+			base.fermer();
+		}
+		return image;
+	}
+
+	@Override
+	public Integer trouverImage(String titre) throws RemoteException {
+		Integer idImage = null;
+		Base base = new Base();
+		if (base.ouvrir()) {
+			idImage = base.trouverImage(titre);
+			base.fermer();
+		}
+		return idImage;
+	}
+	
 	public static void main(String [] args) {
 		
 		int port = 10000;

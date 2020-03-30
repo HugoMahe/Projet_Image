@@ -1,14 +1,11 @@
 package schema;
 
-import java.io.FileInputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
 
 
@@ -28,6 +25,15 @@ Connection co = null;
 	
 	public boolean ouvrir() {
 		System.out.println("Ouverture de la base");
+		
+
+		try {
+			Class.forName
+				("com.mysql.cj.jdbc.Driver");
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		
 		boolean res = false;
 		
 		String url = null;
@@ -137,6 +143,40 @@ Connection co = null;
 		base.fermer();
 	}
 	
-	
+	public byte[] recuperationImage(int idImage) {
+		byte[] image = null;
+		try {
+			PreparedStatement ps = co.prepareStatement("SELECT `jpeg` FROM t_image WHERE idImage=?");
+			ps.setInt(1, idImage);
+			System.out.println(ps.toString());
+			ResultSet rs = ps.executeQuery();
+
+			if (rs.first()) {
+				image = rs.getBytes("jpeg");
+				System.out.println(image);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return image;
+	}
+
+	public Integer trouverImage(String titre) {
+		Integer idImage = null;
+		try {
+			PreparedStatement ps = co.prepareStatement("SELECT `idImage` FROM t_image WHERE titre=?");
+			ps.setString(1, titre);
+			System.out.println(ps.toString());
+			ResultSet rs = ps.executeQuery();
+
+			if (rs.first()) {
+				idImage = rs.getInt("idImage");
+				System.out.println(idImage);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return idImage;
+	}
 	
 }
