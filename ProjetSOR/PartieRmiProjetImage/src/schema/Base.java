@@ -110,17 +110,18 @@ Connection co = null;
 		return null;
 	}
 	
-	public boolean ajoutImage(String titre, FileInputStream StreamMonTabOctets){
+	public boolean ajoutImage(Image img){
 		String requete=null;
 		try {
-			requete= "INSERT INTO `t_image (`jpeg`, `titre`) VALUES ('" + StreamMonTabOctets + "'" + titre +"')";
+			requete= "INSERT INTO `t_image` (`jpeg`, `titre`) VALUES ('" + img.getMonImage() + "','" + img.getTitre() +"');";
 			System.out.println(requete);
 			Statement stmt = co.createStatement();
 			stmt.execute(requete);
+			return true;
 		} catch (SQLException e) {
 			e.printStackTrace();
+			return false;
 		}
-		return false;
 	}
 	
 	public boolean fermer() {

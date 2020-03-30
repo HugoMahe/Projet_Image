@@ -1,12 +1,5 @@
-package bean;
+package schema;
 
-import java.io.File;
-
-/**
- * Objet qui reprend l'ensemble des attributs d'une image
- * @author Hugo Mahé, Léo Mazé
- *
- */
 public class Image {
 	private String titre;
 	private byte[] fichier;
@@ -28,5 +21,4 @@ public class Image {
 		this.titre=titre;
 		this.fichier=monImg;
 	}
-
 }

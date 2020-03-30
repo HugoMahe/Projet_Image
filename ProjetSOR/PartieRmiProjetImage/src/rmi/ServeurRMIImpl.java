@@ -5,6 +5,9 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 
+import schema.Base;
+import schema.Image;
+
 /**
  * Implementation de l'interface ServeurRMI
  * @author Hugo Mahé, Léo Mazé
@@ -16,6 +19,17 @@ public class ServeurRMIImpl implements ServeurRMI {
 	public String meth() throws RemoteException {
 		// TODO Auto-generated method stub
 		return "Reponse du serveur RMI";
+	}
+	
+	@Override
+	public boolean ajouterImage(String titre, byte[] bytes) throws RemoteException {
+		Base base = new Base();
+		base.ouvrir();
+		Image img = new Image(titre, bytes);
+		base.ajoutImage(img);
+		// TODO Auto-generated method stub
+		base.fermer();
+		return false;
 	}
 	
 	public static void main(String [] args) {
@@ -55,7 +69,6 @@ public class ServeurRMIImpl implements ServeurRMI {
 		System.out.println("Serveur RMI lancé");
 		
 	}
-
 	
 
 }
