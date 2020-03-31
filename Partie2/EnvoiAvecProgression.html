@@ -1,0 +1,35 @@
+<html>
+    <head>
+        <TITLE>AjoutImage</TITLE>
+        <script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.min.js'></script>
+        <script>var Progression=0</script>
+    </head>
+    <body>
+        <h1>Formulaire d'envoi de fichier</h1>
+        <form  id="formulaire" enctype="multipart/form-data" method="post">
+             Nom du fichier <input type="text" name="titre"/>
+             Chercher le fichier <input type="file" name="fichier"/>
+            <input type="submit" value="Envoyer le fichier sur le serveur" id="Envoi"/> 
+        </form>
+        <script type="text/javascript">
+            var formu = $('#formulaire');
+            formu.submit(function(e){
+                e.preventDefault();
+                $.ajax({
+                    type: "POST",
+                    url: "http://localhost:8080/ProjetPartieServletImage/AjoutImageProgression",
+                    data: $("#formulaire").serialize(),
+                    success: function(response) {
+                        console.log("SUCCES")
+                        console.log(data)
+                    }
+                })
+            });
+        </script>
+        <div id="Progression">
+            <script>
+                    document.getElementById('Progression').innerText=Progression
+            </script>
+        </div>
+    </body>
+</html>
