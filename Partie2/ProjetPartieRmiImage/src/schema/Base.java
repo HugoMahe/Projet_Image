@@ -7,7 +7,6 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ResourceBundle;
 
 
@@ -71,19 +70,17 @@ Connection co = null;
 		String requete=null;
 		InputStream is = new ByteArrayInputStream(image);
 		try {
-			//requete= "INSERT INTO `t_image` (`jpeg`, `titre`) VALUES ('" + image + "','" + titre +"');";
 			requete = "INSERT INTO `t_image` (`jpeg`, `titre`) VALUES (?,?);";
 			PreparedStatement pst = co.prepareStatement(requete);
 			// CONFIGURATION DES PARAMS
 			pst.setBinaryStream(1, is);
 			pst.setString(2, titre);
-			System.out.println(requete);
 			pst.execute();
 			return true;
 		} catch (SQLException e) {
 			e.printStackTrace();
-			return false;
 		}
+		return false;
 	}
 	
 	public boolean fermer() {

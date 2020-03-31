@@ -23,10 +23,9 @@ public class ServeurRMIImpl implements ServeurRMI {
 	public boolean ajouterImage(String titre, byte[] image) throws RemoteException {
 		Base base = new Base();
 		base.ouvrir();
-		base.ajoutImage(titre, image);
-		// TODO Auto-generated method stub
+		boolean res = base.ajoutImage(titre, image);
 		base.fermer();
-		return false;
+		return res;
 	}
 	
 	@Override

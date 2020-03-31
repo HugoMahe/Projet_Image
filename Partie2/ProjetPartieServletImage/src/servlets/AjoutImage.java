@@ -33,7 +33,6 @@ public class AjoutImage extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		System.out.println("LANCEMENT DO GET");
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
@@ -42,15 +41,9 @@ public class AjoutImage extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		System.out.println("LANCEMENT DO POST");
 		String titre = request.getParameter("titre");
-		//Image image = new ObjectMapper().readValue(request.getReader(), Image.class);
-		//String titre = image.getTitre();
-		System.out.println("TITRE RECUP :" + titre);
 		Part filePart = request.getPart("fichier");
 		String nomFichier = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
-		System.out.println(nomFichier);
 		InputStream contenuFichier = filePart.getInputStream();
 		if(contenuFichier!=null) {
 			ByteArrayOutputStream os= new ByteArrayOutputStream();
@@ -64,13 +57,14 @@ public class AjoutImage extends HttpServlet {
 			System.out.println("AJOUT DE L'IMAGE");
 			if(res) {
 				System.out.println("AJOUT REUSSI");
+				response.getWriter().append("<h1>" + "ajoutReussi" + "</h1>");
 			}else {
 				System.out.println("ERREUR DANS l'AJOUT");
+				response.getWriter().append("<h1>" + "Erreur dans l'ajout de l'image" + "</h1>");
 			}
 		}else {
 			System.out.println("Le fichier envoyé semble null");
 		}
 		doGet(request, response);
 	}
-
 }
